@@ -8,6 +8,16 @@ if (navToggle) {
 }
 
 // =========================================================
+// HEADER CHE SI RIMPICCIOLISCE ALLO SCROLL
+// =========================================================
+const siteHeader = document.querySelector('.site-header');
+if (siteHeader) {
+  const updateHeaderScrolled = () => siteHeader.classList.toggle('scrolled', window.scrollY > 40);
+  window.addEventListener('scroll', updateHeaderScrolled, { passive: true });
+  updateHeaderScrolled();
+}
+
+// =========================================================
 // FAQ ACCORDION
 // =========================================================
 function initFaqAccordion() {
