@@ -99,6 +99,11 @@ tr:last-child td{ border-bottom:none; }
 .btn.danger{ background:#fff; border-color:var(--danger); color:var(--danger); }
 .btn:hover{ opacity:.88; }
 select.status-select{ font-size:12px; padding:4px 8px; border-radius:6px; border:1px solid var(--border); }
+.btn-delete{
+  background:none; border:1px solid var(--border); border-radius:6px;
+  padding:4px 9px; cursor:pointer; font-size:13px; line-height:1;
+}
+.btn-delete:hover{ border-color:var(--danger); background:#FBEAEA; }
 
 /* ---------- FORMS ---------- */
 .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }

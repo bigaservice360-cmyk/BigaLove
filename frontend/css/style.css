@@ -165,6 +165,9 @@ p{ margin:0 0 1em; }
   position:absolute; inset:0;
   background: linear-gradient(180deg, rgba(31,42,34,.15) 0%, rgba(31,42,34,.75) 100%);
 }
+
+.hero-image-full{ line-height:0; }
+.hero-image-full img{ display:block; width:100%; height:auto; }
 .hero-inner{
   position:relative; z-index:2;
   padding: 60px 24px 64px;
@@ -447,7 +450,7 @@ input:focus, select:focus, textarea:focus{
    INTRO COPY — misura di lettura confortevole senza restringere
    tutto il contenitore (stats-grid resta a piena larghezza)
 ========================================================= */
-.intro-copy{ max-width: 68ch; }
+.intro-copy{ max-width: 68ch; margin: 0 auto; text-align: center; }
 
 /* =========================================================
    SPLIT BLOCK (testo + immagine affiancati)

@@ -86,19 +86,13 @@
         </div>
       </div>
 
-      <div class="form-row full" id="noleggio-link-row" style="display:none;">
-        <div class="route-soon-card" style="text-align:left;padding:20px 24px;">
-          <p style="margin:0;">Nessun problema: puoi noleggiarne una. <a href="noleggio.html" style="color:inherit;text-decoration:underline;">Vai al form per il noleggio →</a></p>
-        </div>
-      </div>
-
       <div id="iscrizione-submit-group">
         <label class="checkbox-row">
           <input type="checkbox" name="privacy" required>
           <span>Accetto il <a href="#" style="text-decoration:underline;">regolamento</a> e che i dati verranno trattati ai fini organizzativi della ride.</span>
         </label>
 
-        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Conferma iscrizione</button>
+        <button type="submit" id="iscrizione-submit-btn" class="btn btn-primary" style="width:100%; justify-content:center;">Conferma iscrizione</button>
       </div>
       <div id="form-msg" class="form-msg"></div>
     </form>
@@ -118,21 +112,19 @@
 
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script src="js/supabase-client.js?v=2"></script>
-<script src="js/main.js?v=5"></script>
+<script src="js/main.js?v=7"></script>
 <script>
 (function toggleCargoBikeFields() {
   const select = document.getElementById('ha_bici_cargo');
   const details = document.getElementById('cargo-bike-details');
-  const noleggioRow = document.getElementById('noleggio-link-row');
-  const submitGroup = document.getElementById('iscrizione-submit-group');
-  const privacyCheckbox = document.querySelector('#iscrizione-submit-group input[name="privacy"]');
+  const submitBtn = document.getElementById('iscrizione-submit-btn');
   if (!select) return;
   function update() {
     const haBici = select.value === 'si';
     details.style.display = haBici ? '' : 'none';
-    noleggioRow.style.display = haBici ? 'none' : '';
-    submitGroup.style.display = haBici ? '' : 'none';
-    if (privacyCheckbox) privacyCheckbox.required = haBici;
+    submitBtn.textContent = haBici ? 'Conferma iscrizione' : 'Richiedi noleggio';
+    submitBtn.classList.toggle('btn-primary', haBici);
+    submitBtn.classList.toggle('btn-dark', !haBici);
   }
   select.addEventListener('change', update);
   update();

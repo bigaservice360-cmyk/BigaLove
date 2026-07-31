@@ -196,16 +196,29 @@ async function handleIscrizioneSubmit(e) {
     const { error } = await supabaseClient.from('iscrizioni').insert([payload]);
     if (error) throw error;
 
-    msg.textContent = 'Iscrizione ricevuta! Controlla la tua email per i prossimi passi.';
+    if (payload.richiede_noleggio) {
+      const { error: erroreNoleggio } = await supabaseClient.from('richieste_noleggio').insert([{
+        nome: payload.nome,
+        cognome: payload.cognome,
+        email: payload.email,
+        telefono: payload.telefono
+      }]);
+      if (erroreNoleggio) throw erroreNoleggio;
+    }
+
+    msg.textContent = payload.richiede_noleggio
+      ? 'Richiesta ricevuta! Ti ricontatteremo noi per parlare di modello e disponibilità della cargo bike.'
+      : 'Iscrizione ricevuta! Controlla la tua email per i prossimi passi.';
     msg.className = 'form-msg ok';
     form.reset();
+    form.ha_bici_cargo.dispatchEvent(new Event('change'));
   } catch (err) {
     console.error(err);
     msg.textContent = 'Qualcosa è andato storto. Riprova tra poco o scrivici via email.';
     msg.className = 'form-msg err';
+    submitBtn.textContent = payload.richiede_noleggio ? 'Richiedi noleggio' : 'Conferma iscrizione';
   } finally {
     submitBtn.disabled = false;
-    submitBtn.textContent = 'Conferma iscrizione';
   }
 }
 

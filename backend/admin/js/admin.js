@@ -87,10 +87,10 @@ async function loadDashboard() {
 // =========================================================
 async function loadIscrizioni() {
   const tbody = document.getElementById('iscrizioni-tbody');
-  tbody.innerHTML = '<tr><td colspan="7">Caricamento...</td></tr>';
+  tbody.innerHTML = '<tr><td colspan="8">Caricamento...</td></tr>';
   const { data, error } = await supabaseClient.from('iscrizioni').select('*').order('creato_il', { ascending: false });
-  if (error) { tbody.innerHTML = `<tr><td colspan="7">Errore: ${error.message}</td></tr>`; return; }
-  if (!data.length) { tbody.innerHTML = '<tr><td colspan="7">Nessuna iscrizione ancora.</td></tr>'; return; }
+  if (error) { tbody.innerHTML = `<tr><td colspan="8">Errore: ${error.message}</td></tr>`; return; }
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="8">Nessuna iscrizione ancora.</td></tr>'; return; }
 
   tbody.innerHTML = data.map(row => `
     <tr>
@@ -107,6 +107,7 @@ async function loadIscrizioni() {
         </select>
       </td>
       <td>${new Date(row.creato_il).toLocaleDateString('it-IT')}</td>
+      <td><button class="btn-delete" onclick="deleteIscrizione('${row.id}')" title="Elimina">🗑</button></td>
     </tr>
   `).join('');
 }
@@ -116,22 +117,39 @@ async function updateIscrizioneStato(id, stato) {
   loadDashboard();
 }
 
+async function deleteIscrizione(id) {
+  if (!confirm('Eliminare definitivamente questa iscrizione?')) return;
+  const { error } = await supabaseClient.from('iscrizioni').delete().eq('id', id);
+  if (error) { alert('Errore durante l\'eliminazione: ' + error.message); return; }
+  loadIscrizioni();
+  loadDashboard();
+}
+
 // =========================================================
 // NOLEGGIO
 // =========================================================
 async function loadNoleggio() {
   const tbody = document.getElementById('noleggio-tbody');
-  tbody.innerHTML = '<tr><td colspan="5">Caricamento...</td></tr>';
+  tbody.innerHTML = '<tr><td colspan="6">Caricamento...</td></tr>';
   const { data, error } = await supabaseClient.from('richieste_noleggio').select('*').order('creato_il', { ascending: false });
-  if (error) { tbody.innerHTML = `<tr><td colspan="5">Errore: ${error.message}</td></tr>`; return; }
-  if (!data.length) { tbody.innerHTML = '<tr><td colspan="5">Nessuna richiesta ancora.</td></tr>'; return; }
+  if (error) { tbody.innerHTML = `<tr><td colspan="6">Errore: ${error.message}</td></tr>`; return; }
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="6">Nessuna richiesta ancora.</td></tr>'; return; }
   tbody.innerHTML = data.map(row => `
     <tr>
       <td>${row.nome} ${row.cognome}</td>
       <td>${row.email}<br><span style="color:var(--stone)">${row.telefono}</span></td>
-      <td>${row.modello_bici}</td>
+      <td>${row.modello_bici ?? '—'}</td>
       <td>${row.tipo_noleggio === 'rent_and_buy' ? 'Rent & Buy' : 'Classico'}</td>
       <td><span class="badge ${row.stato}">${row.stato.replace('_',' ')}</span></td>
+      <td><button class="btn-delete" onclick="deleteNoleggio('${row.id}')" title="Elimina">🗑</button></td>
     </tr>
   `).join('');
+}
+
+async function deleteNoleggio(id) {
+  if (!confirm('Eliminare definitivamente questa richiesta di noleggio?')) return;
+  const { error } = await supabaseClient.from('richieste_noleggio').delete().eq('id', id);
+  if (error) { alert('Errore durante l\'eliminazione: ' + error.message); return; }
+  loadNoleggio();
+  loadDashboard();
 }
