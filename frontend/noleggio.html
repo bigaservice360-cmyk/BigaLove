@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noleggio cargo bike — BigaLove Ride</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="BigaLove Ride" class="site-logo-img"></a>
+    <button class="nav-toggle" aria-label="Apri menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="iscriviti.html">Iscriviti</a></li>
+      <li><a href="noleggio.html" class="active">Noleggio</a></li>
+      <li><a href="edizioni-precedenti.html">Edizioni precedenti</a></li>
+      <li><a href="cosa-e-bigalove.html">Cos'è BigaLove</a></li>    </ul>
+  </div>
+</header>
+
+<main>
+
+<section class="section" style="padding-top:60px;">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Non hai una cargo bike?</span>
+      <h2>Noleggio</h2>
+      <p>Arrivi al raduno e trovi la tua cargo bike pronta. Pensiamo noi a logistica, trasporto e preparazione.</p>
+    </div>
+
+    <div class="form-card">
+      <h3 style="font-size:1.3rem;">Richiedi il noleggio</h3>
+      <p style="font-size:14px; color:var(--stone);">Compilando il form, verrai ricontattato dal Team Biga per scegliere la cargo bike più adatta a te.</p>
+      <form id="noleggio-form">
+        <div class="form-row">
+          <div><label for="n-nome">Nome</label><input type="text" id="n-nome" name="nome" required></div>
+          <div><label for="n-cognome">Cognome</label><input type="text" id="n-cognome" name="cognome" required></div>
+        </div>
+        <div class="form-row">
+          <div><label for="n-email">Email</label><input type="email" id="n-email" name="email" required></div>
+          <div><label for="n-telefono">Telefono</label><input type="tel" id="n-telefono" name="telefono" required></div>
+        </div>
+        <button type="submit" class="btn btn-dark" style="width:100%; justify-content:center;">Invia richiesta</button>
+        <div id="form-msg" class="form-msg"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span id="secret-trigger" class="secret-trigger">© 2026 BigaLove Ride</span>
+      <span>Privacy · Termini</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js?v=2"></script>
+<script src="js/main.js?v=5"></script>
+<script>
+document.getElementById('noleggio-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const msg = document.getElementById('form-msg');
+  const payload = {
+    nome: f.nome.value.trim(),
+    cognome: f.cognome.value.trim(),
+    email: f.email.value.trim(),
+    telefono: f.telefono.value.trim()
+  };
+  try {
+    const { error } = await supabaseClient.from('richieste_noleggio').insert([payload]);
+    if (error) throw error;
+    msg.textContent = 'Richiesta inviata! Ti ricontatteremo noi per parlare di modello e disponibilità.';
+    msg.className = 'form-msg ok';
+    f.reset();
+  } catch (err) {
+    msg.textContent = 'Qualcosa è andato storto. Riprova o scrivici via email.';
+    msg.className = 'form-msg err';
+  }
+});
+</script>
+</body>
+</html>

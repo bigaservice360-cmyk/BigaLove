@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>BigaLove Ride — Pannello di gestione</title>
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen" class="login-screen">
+  <div class="login-card">
+    <img src="assets/img/logo.png" alt="BigaLove Ride" style="height:44px;margin-bottom:14px;">
+    <p style="font-size:13px;color:var(--stone);">Accedi con le credenziali staff per gestire il sito.</p>
+    <form id="login-form">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required style="margin-bottom:12px;">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required style="margin-bottom:12px;">
+      <button type="submit" class="btn">Accedi</button>
+      <p id="login-error" style="color:var(--danger); font-size:13px; margin-top:10px;"></p>
+    </form>
+    <p class="hint">Gli account staff si creano da Supabase Dashboard → Authentication → Users. Nessuna auto-registrazione pubblica.</p>
+  </div>
+</div>
+
+<!-- APP ADMIN -->
+<div id="admin-app" style="display:none; width:100%;">
+  <aside class="admin-sidebar">
+    <div class="admin-logo"><img src="assets/img/logo.png" alt="BigaLove Ride"></div>
+
+    <div class="nav-item active" data-view="dashboard"><span class="dot"></span> Dashboard</div>
+
+    <div class="sidebar-section-label">Iscrizioni</div>
+    <div class="nav-item" data-view="iscrizioni"><span class="dot"></span> Iscrizioni ride</div>
+    <div class="nav-item" data-view="noleggio"><span class="dot"></span> Richieste noleggio</div>
+
+    <div style="margin-top:auto; padding-top:20px;">
+      <div class="nav-item" id="logout-btn"><span class="dot"></span> Esci</div>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-topbar"><h1 id="topbar-title">Dashboard</h1></div>
+    <div class="admin-content">
+
+      <!-- DASHBOARD -->
+      <section id="view-dashboard" class="view active">
+        <div id="dashboard-stats"></div>
+        <div class="card">
+          <h3>Come funziona questo pannello</h3>
+          <p style="font-size:13px;color:var(--stone);">
+            Qui trovi le iscrizioni alla ride e le richieste di noleggio inviate dal sito pubblico.
+          </p>
+        </div>
+      </section>
+
+      <!-- ISCRIZIONI -->
+      <section id="view-iscrizioni" class="view">
+        <div class="card">
+          <div class="card-head"><h3>Iscrizioni alla ride</h3></div>
+          <table>
+            <thead><tr><th>Nome</th><th>Contatti</th><th>Città</th><th>Bici</th><th>Stato</th><th>Aggiorna</th><th>Data</th></tr></thead>
+            <tbody id="iscrizioni-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- NOLEGGIO -->
+      <section id="view-noleggio" class="view">
+        <div class="card">
+          <div class="card-head"><h3>Richieste di noleggio</h3></div>
+          <table>
+            <thead><tr><th>Nome</th><th>Contatti</th><th>Modello</th><th>Tipo</th><th>Stato</th></tr></thead>
+            <tbody id="noleggio-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

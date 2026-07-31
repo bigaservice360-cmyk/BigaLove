@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iscriviti — BigaLove Ride</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="BigaLove Ride" class="site-logo-img"></a>
+    <button class="nav-toggle" aria-label="Apri menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="iscriviti.html" class="active">Iscriviti</a></li>
+      <li><a href="noleggio.html">Noleggio</a></li>
+      <li><a href="edizioni-precedenti.html">Edizioni precedenti</a></li>
+      <li><a href="cosa-e-bigalove.html">Cos'è BigaLove</a></li>    </ul>
+  </div>
+</header>
+
+<main>
+
+<section class="section" style="padding-top:60px;">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Prenota il tuo posto</span>
+      <h2>Iscrizione BigaLove Ride</h2>
+      <p>Compila il modulo: bastano due minuti. L'iscrizione è gratuita, i dati ci servono solo per organizzare al meglio la ride.</p>
+    </div>
+
+    <form id="iscrizione-form" class="form-card" novalidate>
+      <div class="form-row">
+        <div>
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" required>
+        </div>
+        <div>
+          <label for="cognome">Cognome</label>
+          <input type="text" id="cognome" name="cognome" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="telefono">Numero di telefono</label>
+          <input type="tel" id="telefono" name="telefono" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div>
+          <label for="citta">Città</label>
+          <input type="text" id="citta" name="citta" required>
+        </div>
+        <div>
+          <label for="codice_fiscale">Codice fiscale</label>
+          <input type="text" id="codice_fiscale" name="codice_fiscale" maxlength="16" style="text-transform:uppercase;" required>
+        </div>
+      </div>
+
+      <div class="form-row full">
+        <div>
+          <label for="ha_bici_cargo">Hai già una cargo bike?</label>
+          <select id="ha_bici_cargo" name="ha_bici_cargo" required>
+            <option value="si">Sì</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row" id="cargo-bike-details">
+        <div>
+          <label for="marchio_bici">Marchio</label>
+          <input type="text" id="marchio_bici" name="marchio_bici">
+        </div>
+        <div>
+          <label for="modello_bici">Modello</label>
+          <input type="text" id="modello_bici" name="modello_bici">
+        </div>
+      </div>
+
+      <div class="form-row full" id="noleggio-link-row" style="display:none;">
+        <div class="route-soon-card" style="text-align:left;padding:20px 24px;">
+          <p style="margin:0;">Nessun problema: puoi noleggiarne una. <a href="noleggio.html" style="color:inherit;text-decoration:underline;">Vai al form per il noleggio →</a></p>
+        </div>
+      </div>
+
+      <div id="iscrizione-submit-group">
+        <label class="checkbox-row">
+          <input type="checkbox" name="privacy" required>
+          <span>Accetto il <a href="#" style="text-decoration:underline;">regolamento</a> e che i dati verranno trattati ai fini organizzativi della ride.</span>
+        </label>
+
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Conferma iscrizione</button>
+      </div>
+      <div id="form-msg" class="form-msg"></div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span id="secret-trigger" class="secret-trigger">© 2026 BigaLove Ride</span>
+      <span>Privacy · Termini</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js?v=2"></script>
+<script src="js/main.js?v=5"></script>
+<script>
+(function toggleCargoBikeFields() {
+  const select = document.getElementById('ha_bici_cargo');
+  const details = document.getElementById('cargo-bike-details');
+  const noleggioRow = document.getElementById('noleggio-link-row');
+  const submitGroup = document.getElementById('iscrizione-submit-group');
+  const privacyCheckbox = document.querySelector('#iscrizione-submit-group input[name="privacy"]');
+  if (!select) return;
+  function update() {
+    const haBici = select.value === 'si';
+    details.style.display = haBici ? '' : 'none';
+    noleggioRow.style.display = haBici ? 'none' : '';
+    submitGroup.style.display = haBici ? '' : 'none';
+    if (privacyCheckbox) privacyCheckbox.required = haBici;
+  }
+  select.addEventListener('change', update);
+  update();
+})();
+</script>
+</body>
+</html>

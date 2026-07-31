@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BigaLove Ride — Una salita, un cuore, mille motivi per pedalare</title>
+<meta name="description" content="BigaLove Ride: iscriviti alla nostra cargo bike ride tra sterrati e passi di montagna. Iscrizione gratuita, noleggio bici disponibile.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="BigaLove Ride" class="site-logo-img"></a>
+    <button class="nav-toggle" aria-label="Apri menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="iscriviti.html">Iscriviti</a></li>
+      <li><a href="noleggio.html">Noleggio</a></li>
+      <li><a href="edizioni-precedenti.html">Edizioni precedenti</a></li>
+      <li><a href="cosa-e-bigalove.html">Cos'è BigaLove</a></li>    </ul>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" data-block-tipo="hero" style="background-image: linear-gradient(180deg, rgba(31,42,34,.1), rgba(31,42,34,.8)), url('assets/img/hero.jpg');">
+  <div class="hero-inner">
+    <h1>Porta sulla cargo <em>ciò che più ami</em>.</h1>
+    <a href="iscriviti.html" class="btn btn-primary">Riserva il mio posto per la ride →</a>
+  </div>
+</section>
+
+<!-- CAROSELLO 1 -->
+<section class="section" data-block-tipo="galleria" style="padding-top:64px;padding-bottom:64px;">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Edizione 2025</span>
+      <h2>Milano Navigli</h2>
+    </div>
+  </div>
+  <div class="carousel-viewport">
+    <div class="carousel" data-categoria="home">
+      <img src="assets/img/carosello/carosello-01.jpg" alt="BigaLove Ride 2025, Milano Navigli">
+      <img src="assets/img/carosello/carosello-02.jpg" alt="BigaLove Ride 2025, Milano Navigli">
+      <img src="assets/img/carosello/carosello-03.jpg" alt="BigaLove Ride 2025, Milano Navigli">
+      <img src="assets/img/carosello/carosello-04.jpg" alt="BigaLove Ride 2025, Milano Navigli">
+      <img src="assets/img/carosello/carosello-05.jpg" alt="BigaLove Ride 2025, Milano Navigli">
+      <img src="assets/img/carosello/carosello-06.jpg" alt="BigaLove Ride 2025, Milano Navigli">
+      <img src="assets/img/carosello/carosello-07.jpg" alt="BigaLove Ride 2025, Milano Navigli">
+      <img src="assets/img/carosello/carosello-08.jpg" alt="BigaLove Ride 2025, Milano Navigli">
+      <img src="assets/img/carosello/carosello-09.jpg" alt="BigaLove Ride 2025, Milano Navigli">
+    </div>
+  </div>
+</section>
+
+<!-- LA RIDE — STATISTICHE -->
+<section class="section" id="la-ride" data-block-tipo="statistiche" style="background:var(--cream-dim);">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Il percorso</span>
+      <h2>La Ride</h2>
+    </div>
+    <div id="ride-stats-container">
+      <div class="route-soon-card">
+        <p>Si parte dai Canottieri San Cristoforo (Alzaia Naviglio Grande, 122) e si pedala insieme fino al Lago di Mezzetta, dove ci fermiamo per una sosta tutti insieme — prima di tornare, senza fretta, al punto di partenza.<br>Distanza, dislivello e data ufficiale sono ancora in fase di definizione: arrivano molto presto, qui e sui nostri canali.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAPPA GPX -->
+<section class="section" data-block-tipo="mappa_gpx">
+  <div class="container">
+    <div class="section-head">
+      <h2>Il percorso</h2>
+      <p>Ipotesi di tracciato: partenza e ritorno ai Canottieri San Cristoforo, con sosta al Lago Mezzetta.</p>
+    </div>
+    <div class="map-frame">
+      <div id="gpx-map"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ISCRIZIONE + FAQ -->
+<section class="section" data-block-tipo="faq" style="background:var(--cream-dim);">
+  <div class="container" style="max-width:760px;">
+    <div class="section-head">
+      <span class="eyebrow">Prenota il tuo posto</span>
+      <h2>Iscrizione &amp; FAQ</h2>
+      <p>L'iscrizione è gratuita: i tuoi dati ci servono solo per organizzare al meglio la ride.</p>
+    </div>
+    <div id="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Non hai una cargo bike? <span class="icon">+</span></button>
+        <div class="faq-a"><p>Puoi noleggiarne una. <a href="noleggio.html">Vai al form per il noleggio →</a></p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Quanto costa iscriversi? <span class="icon">+</span></button>
+        <div class="faq-a"><p>L'iscrizione è completamente gratuita: chiediamo nome, cognome, email, telefono, città e codice fiscale solo per organizzare al meglio la ride.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Cosa succede dopo l'iscrizione? <span class="icon">+</span></button>
+        <div class="faq-a"><p>Riceverai una email di conferma con tutti i dettagli della ride.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">C'è un servizio di noleggio bici? <span class="icon">+</span></button>
+        <div class="faq-a"><p>Sì, trovi tutte le informazioni nella pagina Noleggio: prenota entro la data indicata per garantirti modello e colore.</p></div>
+      </div>
+    </div>
+    <div class="text-center mt-40">
+      <a href="iscriviti.html" class="btn btn-primary">Vai al modulo di iscrizione →</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo"><img src="assets/img/logo.png" alt="BigaLove Ride" class="site-logo-img" style="height:32px;"></div>
+        <p style="opacity:.85;font-size:14px;max-width:32ch;margin-top:12px;">Porta sulla cargo <em style="color:var(--love);font-style:normal;">ciò che più ami</em>.</p>
+      </div>
+      <div>
+        <h4>Naviga</h4>
+        <ul>
+          <li><a href="iscriviti.html">Iscriviti</a></li>
+          <li><a href="noleggio.html">Noleggio</a></li>
+          <li><a href="edizioni-precedenti.html">Edizioni precedenti</a></li>
+          <li><a href="cosa-e-bigalove.html">Cos'è BigaLove</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contatti</h4>
+        <ul>
+          <li>info@lacargobike.com</li>
+          <li>
+            <a href="https://biga.bike" target="_blank" rel="noopener" class="footer-social-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+              Biga.bike
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/biga.bike" target="_blank" rel="noopener" class="footer-social-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+              Biga.bike
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span id="secret-trigger" class="secret-trigger">BigaLove powered by Biga.bike</span>
+      <span>Privacy · Termini</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-gpx@1.7.0/gpx.js"></script>
+<script src="js/supabase-client.js?v=2"></script>
+<script src="js/main.js?v=5"></script>
+</body>
+</html>
