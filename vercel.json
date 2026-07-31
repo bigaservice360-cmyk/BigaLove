@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/admin", "destination": "/backend/admin/index.html" },
+    { "source": "/admin/", "destination": "/backend/admin/index.html" },
+    { "source": "/admin/:path*", "destination": "/backend/admin/:path*" },
+    { "source": "/", "destination": "/frontend/index.html" },
+    { "source": "/:path*", "destination": "/frontend/:path*" }
+  ]
+}
